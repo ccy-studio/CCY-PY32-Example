@@ -74,9 +74,10 @@ int main(void) {
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-    printf("GPIO进入按键中断\n");
     if (GPIO_Pin == GPIO_PIN_0) {
-        HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
+        if (!HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0)) {
+            HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_1);
+        }
     }
 }
 
